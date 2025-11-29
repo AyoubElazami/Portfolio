@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayoub EL AZAMI | Développeur Web Full-Stack</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES DE DESIGN --- */
+        :root {
+            --dark-bg: #111827; /* Fond principal sombre */
+            --dark-card: #1F2937; /* Fond des cartes */
+            --primary-color: #38BDF8; /* Bleu clair et vif */
+            --secondary-color: #E0E7FF; /* Texte clair/secondaire */
+            --text-color: #F9FAFB; /* Texte principal */
+            --border-color: rgba(255, 255, 255, 0.1);
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --border-radius: 12px;
+        }
+
+        /* --- STYLES GÉNÉRAUX & RESET --- */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Active le défilement fluide ! */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-color);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+        }
+        
+        h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--text-color);
+            position: relative;
+        }
+
+        h2::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        section {
+            padding: 100px 0;
+            overflow: hidden; /* Important pour les animations */
+        }
+
+        /* --- ANIMATION D'APPARITION AU SCROLL --- */
+        .animated-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .animated-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HEADER DE NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+            background-color: rgba(17, 24, 39, 0.8); /* Fond semi-transparent */
+            backdrop-filter: blur(10px); /* Effet verre dépoli */
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            text-decoration: none;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background-color: var(--primary-color);
+            transition: width 0.3s ease, left 0.3s ease;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+        nav a:hover::after, nav a.active::after {
+            width: 100%;
+            left: 0;
+        }
+
+        /* --- SECTION ACCUEIL --- */
+/* --- SECTION ACCUEIL --- */
+#accueil {
+    position: relative; /* Essentiel pour la superposition */
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden; /* Cache les débordements */
+    /* Mise en place de votre image de fond */
+    background-image: url('dev.png');
+    background-size: cover;
+    background-position: center center;
+    background-attachment: fixed; /* Crée un effet parallax superbe au défilement ! */
+}
+
+/* Ajout d'une surcouche sombre pour la lisibilité */
+
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .profile-img {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            border: 4px solid var(--primary-color);
+            margin-bottom: 25px;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.4);
+        }
+
+        #accueil h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        #accueil .subtitle {
+            font-size: 1.3rem;
+            color: var(--secondary-color);
+            margin-bottom: 30px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--primary-color);
+            color: var(--dark-bg);
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        /* --- SECTION COMPÉTENCES --- */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        .skill-card {
+            background: var(--dark-card);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .skill-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+        .skill-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+        .skill-card p {
+            color: var(--secondary-color);
+        }
+
+        /* --- SECTION PROJETS --- */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+        }
+        .project-card {
+            background: var(--dark-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+        }
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #374151;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .project-content {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .project-tags {
+            padding: 15px 25px;
+            border-top: 1px solid var(--border-color);
+        }
+        .tag {
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-right: 5px;
+            margin-bottom: 5px;
+        }
+        
+        /* --- SECTION PARCOURS (TIMELINE) --- */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 3px;
+            background-color: var(--dark-card);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -1.5px;
+        }
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+        }
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -11.5px;
+            background-color: var(--dark-bg);
+            border: 4px solid var(--primary-color);
+            top: 25px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .timeline-left { left: 0; }
+        .timeline-right { left: 50%; }
+        .timeline-right::after { left: -8.5px; }
+        
+        .timeline-content {
+            padding: 25px;
+            background-color: var(--dark-card);
+            border-radius: var(--border-radius);
+            border: 1px solid var(--border-color);
+        }
+
+        /* --- SECTION CONTACT --- */
+        #contact { text-align: center; }
+        #contact p {
+            max-width: 600px;
+            margin: 20px auto 40px;
+            color: var(--secondary-color);
+        }
+        
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* --- RESPONSIVE DESIGN --- */
+        @media screen and (max-width: 768px) {
+            nav ul { display: none; } /* Pour la simplicité, on cache le menu sur mobile */
+            h2 { font-size: 2rem; }
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+            .timeline-left::after, .timeline-right::after { left: 21px; }
+            .timeline-right { left: 0%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#accueil" class="nav-logo">A.ELAZAMI</a>
+            <nav>
+                <ul>
+                    <li><a href="#competences">Compétences</a></li>
+                    <li><a href="#projets">Projets</a></li>
+                    <li><a href="#parcours">Parcours</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section id="accueil">
+            <div class="hero-content">
+                <img src="AyoubEl.jpeg" alt="Photo de Ayoub EL AZAMI" class="profile-img">
+                <h1>Ayoub EL AZAMI</h1>
+                <p class="subtitle">Développeur Web Full-Stack | À la recherche d'une alternance</p>
+                <a href="#contact" class="cta-button">Me Contacter</a>
+            </div>
+        </section>
+
+        <section id="competences" class="animated-section">
+            <div class="container">
+                <h2>Mes Compétences</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <h3>Back-End</h3>
+                        <p>PHP (Symfony, Laravel), Node.js (Express.js), Supabase, API REST</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Front-End</h3>
+                        <p>React, Next.js, React Native, JavaScript (ES6+), HTML5, CSS3, SASS</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Bases de Données</h3>
+                        <p>SQL (MySQL, Oracle), NoSQL (MongoDB, Supabase)</p>
+                    </div>
+                    <div class="skill-card">
+                        <h3>Outils & DevOps</h3>
+                        <p>Git, Docker, Linux, Scrum, CI/CD</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="projets" class="animated-section">
+            <div class="container">
+                <h2>Mes Projets</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <img src="API.png" alt="Illustration du projet API REST" class="project-image">
+                        <div class="project-content">
+                            <h3>API REST de Gestion</h3>
+                            <p>API pour la gestion de sociétés et projets, avec gestion des droits par rôles (admin, manager, consultant).</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">Symfony</span><span class="tag">API Platform</span><span class="tag">JWT</span><span class="tag">Docker</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                         <img src="path_to_project_gym_image.jpg" alt="Illustration du projet Salles de Sport" class="project-image">
+                        <div class="project-content">
+                            <h3>Gestion de Salles de Sport</h3>
+                            <p>Système de gestion complet pour des salles de sport à l'échelle nationale.</p>
+                        </div>
+                        <div class="project-tags">
+                             <span class="tag">PHP</span><span class="tag">Tailwind</span><span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <img src="path_to_project_jobapp_image.jpg" alt="Illustration projet app recrutement" class="project-image">
+                        <div class="project-content">
+                            <h3>Application de Recrutement</h3>
+                            <p>Développement d'une application de recherche d'emploi pour faciliter et automatiser le processus.</p>
+                        </div>
+                        <div class="project-tags">
+                            <span class="tag">PHP</span><span class="tag">Bootstrap</span><span class="tag">JavaScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="parcours" class="animated-section">
+            <div class="container">
+                <h2>Mon Parcours</h2>
+                <div class="timeline">
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                            <h3>Développeur Full-Stack (Stage)</h3>
+                            <p><strong>ONDRH-P4W - Paris</strong> | Jan 2025 - Mai 2025</p>
+                            <p>Conception et développement d'une application de rencontre (web et mobile) de A à Z à partir de maquettes Figma.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-right">
+                        <div class="timeline-content">
+                             <h3>Stagiaire de fin d'études</h3>
+                            <p><strong>L'École Polytechnique des Génies - Fès</strong> | Avr 2024 - Juin 2024</p>
+                            <p>Développement d'une application de recherche d'emploi et de recrutement.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item timeline-left">
+                        <div class="timeline-content">
+                             <h3>Projet de fin d'études</h3>
+                            <p><strong>L'École Supérieure de Technologie - Fès</strong> | Déc 2023 - Avr 2024</p>
+                            <p>App web pour la gestion d'équipements informatiques et le suivi de tickets.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="animated-section">
+            <div class="container">
+                <h2>Entrons en contact</h2>
+                <p>Je suis actuellement à la recherche d'une alternance pour Septembre 2025 et ouvert à toute opportunité. N'hésitez pas à me contacter !</p>
+                <a href="mailto:ayoubazami884@gmail.com" class="cta-button">Envoyez-moi un email</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Ayoub EL AZAMI - Conçu avec passion.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Animation des sections au scroll
+            const sections = document.querySelectorAll('.animated-section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1 // La section devient visible dès que 10% est affiché
+            });
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Mise à jour du lien actif dans la nav
+            const navLinks = document.querySelectorAll('nav a');
+            const allSections = document.querySelectorAll('section');
+            const navObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.getAttribute('id');
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-30% 0px -70% 0px' // Active le lien quand la section est au milieu de l'écran
+            });
+             allSections.forEach(section => {
+                navObserver.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
